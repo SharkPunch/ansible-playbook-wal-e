@@ -46,6 +46,10 @@ wal_e_user: 'postgres'
 wal_e_group: 'postgres'
 wal_e_pgdata_dir: '/var/lib/postgresql/9.1/main/'
 
+# Even though S3 doesn't belong to any regions, we still
+# need to provide either this or WALE_S3_ENDPOINT to wal-e command
+wal_e_aws_region: 'us-east-1'
+
 wal_e_s3_prefix: 's3://some-bucket/directory/or/whatever'
 
 # Set it to true to enable IAM instance profiles.
