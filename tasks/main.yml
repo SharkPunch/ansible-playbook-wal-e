@@ -48,6 +48,20 @@
     path="{{ wal_e_envdir }}/AWS_SECRET_ACCESS_KEY"
   when: wal_e_aws_secret_key is not defined
 
+- name: setup AWS credentials AWS_REGION
+  copy: |
+    content="{{ wal_e_aws_region }}"
+    dest="{{ wal_e_envdir }}/AWS_REGION"
+    owner="{{ wal_e_user}}"
+    group="{{ wal_e_group }}"
+    mode=0600
+  when: wal_e_aws_region is defined
+
+- name: clean AWS credentials AWS_REGION
+  file: |
+    state=absent
+    path="{{ wal_e_envdir }}/AWS_REGION"
+  when: wal_e_aws_region is not defined
 
 - name: setup WAL-E S3 endpoint
   copy: |
