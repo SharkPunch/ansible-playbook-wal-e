@@ -27,11 +27,11 @@
     mode=0600
   when: wal_e_aws_access_key is defined
 
-- name: setup AWS credentials AWS_ACCESS_KEY_ID
+- name: clean AWS credentials AWS_ACCESS_KEY_ID
   file: |
     state=absent
     path="{{ wal_e_envdir }}/AWS_ACCESS_KEY_ID"
-  when: wal_e_aws_access_key is defined
+  when: wal_e_aws_access_key is not defined
 
 - name: setup AWS credentials AWS_SECRET_ACCESS_KEY
   copy: |
@@ -42,11 +42,12 @@
     mode=0600
   when: wal_e_aws_secret_key is defined
 
-- name: setup AWS credentials AWS_SECRET_ACCESS_KEY
+- name: clean AWS credentials AWS_SECRET_ACCESS_KEY
   file: |
     state=absent
     path="{{ wal_e_envdir }}/AWS_SECRET_ACCESS_KEY"
-  when: wal_e_aws_secret_key is defined
+  when: wal_e_aws_secret_key is not defined
+
 
 - name: setup WAL-E S3 endpoint
   copy: |
@@ -57,7 +58,7 @@
     mode=0600
   when: wal_e_s3_endpoint is defined
 
-- name: setup WAL-E S3 endpoint
+- name: clean WAL-E S3 endpoint
   file: |
     state=absent
     path="{{ wal_e_envdir }}/WALE_S3_ENDPOINT"
